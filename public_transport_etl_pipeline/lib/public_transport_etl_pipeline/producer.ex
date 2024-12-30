@@ -14,20 +14,20 @@ defmodule PublicTransportEtlPipeline.Producer do
   end
 
   def handle_demand(demand, state) when demand > 0 do
+    {:noreply, [], state}
+  end
+
+  def handle_info(:fetch, state) do
     case GTFSRealtimeParser.fetch_and_parse(@url) do
       {:ok, vehicle_positions} ->
+        schedule_fetch() # reschedule fetch
         {:noreply, [vehicle_positions], state}
 
       {:error, reason} ->
         IO.puts("Error : #{reason}")
+        schedule_fetch() # reschedule fetch
         {:noreply, [], state}
     end
-  end
-
-  def handle_info(:fetch, state) do
-    schedule_fetch() # reschedule fetch
-
-    {:noreply, [], state}
   end
 
   def schedule_fetch do
