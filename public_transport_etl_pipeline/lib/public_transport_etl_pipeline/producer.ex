@@ -24,6 +24,12 @@ defmodule PublicTransportEtlPipeline.Producer do
     end
   end
 
+  def handle_info(:fetch, state) do
+    schedule_fetch() # reschedule fetch
+
+    {:noreply, [], state}
+  end
+
   def schedule_fetch do
     Process.send_after(self(), :fetch, @fetch_interval)
   end

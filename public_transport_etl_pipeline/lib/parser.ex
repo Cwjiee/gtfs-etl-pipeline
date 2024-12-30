@@ -1,6 +1,6 @@
 defmodule GTFSRealtimeParser do
   @moduledoc """
-  A module to fetch and parse GTFS-Realtime vehicle positions of RapidKl transports
+  A module to fetch and parse GTFS-Realtime vehicle positions of RapidKl transports data in .proto format
   """
 
   alias TransitRealtime.FeedMessage

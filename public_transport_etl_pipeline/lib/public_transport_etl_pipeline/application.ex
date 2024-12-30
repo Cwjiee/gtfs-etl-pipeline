@@ -6,8 +6,8 @@ defmodule PublicTransportEtlPipeline.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      {PublicTransportEtlPipeline.Producer, 0},
-      {PublicTransportEtlPipeline.DataTransform, []},
+      {PublicTransportEtlPipeline.Producer, []},
+      {PublicTransportEtlPipeline.Transformer, []},
       {PublicTransportEtlPipeline.Consumer, []}
     ]
 
